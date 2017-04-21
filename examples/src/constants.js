@@ -1,0 +1,8 @@
+export const ACTIONS = {
+  INCREMENT_COUNTER: 'INCREMENT_COUNTER',
+  DECREMENT_COUNTER: 'DECREMENT_COUNTER'
+};
+
+export const INITIAL_STATE = {
+    count: 0
+};
