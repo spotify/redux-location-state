@@ -2,8 +2,8 @@
   "name": "redux-location-state",
   "description": "Utilities for reading & writing Redux store state to & from the URL",
   "main": "lib/index.js",
-  "author": "Dan Delany <dand@spotify.com> and Josh Blaney <joshb@spotify.com>",
-  "version": "1.0.0",
+  "author": "Josh Blaney <joshb@spotify.com> and Dan Delany <dand@spotify.com>",
+  "version": "1.0.1",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
     "build-examples": "BABEL_ENV=production webpack --config webpack.config.base.js",

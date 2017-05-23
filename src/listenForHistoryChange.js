@@ -1,7 +1,7 @@
 import {LOCATION_POP, LOCATION_PUSH} from './constants';
 import {getCurrentLocation} from './helpers';
 
-export function listenForHistoryChange(history, store) {
+export function listenForHistoryChange(store, history) {
   const popDispatchFunction = (location) => {
     return {
       type: LOCATION_POP,
