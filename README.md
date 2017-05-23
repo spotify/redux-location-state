@@ -12,7 +12,7 @@ Beta, currently working on an update for historyJS v4
 The basic idea is that you pass a config object and based on when the state gets updated, certain query params will follow along, and if a user goes back or forward the state gets updated based on query params. For example
 ```javascript
 {
-  p: {stateKey: 'foo', shouldPush: true, initialState: 'bazz'},
+  p: {stateKey: 'foo', initialState: 'bazz', options: {shouldPush: true}},
 }
 ```
 will make a query param of `p` equal to the state that is passed in with the value on `foo`
@@ -23,7 +23,7 @@ First you need to create a config object
 ```javascript
 const paramSetup = {
     '/': {
-      p: {stateKey: 'foo', shouldPush: true, initialState: 'bazz'},
+      p: {stateKey: 'foo', initialState: 'bazz', options: {shouldPush: true}},
       s: {stateKey: 'bar', initialState: {}, options: {isFlags: true}},
     }
     global: {
@@ -98,6 +98,7 @@ if your redux store value is anything other than a string, it will need to be de
   r: {stateKey: 'foo', type: 'date'},
   q: {stateKey: 'biz', type: 'number'},
   i: {stateKey: 'biz', type: 'array'},
+  w: {stateKey: 'tan', type: 'bool'},
 }
 ```
 
@@ -137,6 +138,10 @@ p: {stateKey: 'foo', options: {
 ### shouldPush
 
 by default, if there is a query param update it will only replace the url (it won't be added to your history), you can override it by adding `shouldPush` to your options
+
+```
+p: {stateKey: 'foo', options: {shouldPush: true}}
+```
 
 ### delimiter 
 

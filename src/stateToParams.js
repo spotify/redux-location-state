@@ -9,7 +9,7 @@ export function stateToParams(initialState, currentState, location) {
   //check the original config for values
   const newQueryParams = Object.keys(pathConfig).reduce((prev, curr) => {
     const {stateKey, options = {}, initialState: initialValue, type} = pathConfig[curr];
-    let currentItemState = get(currentState, stateKey);
+    let currentItemState = get(currentState, stateKey, initialValue);
     let isDefault;
     //check if the date is the same as the one in initial value
     if (type === 'date') {

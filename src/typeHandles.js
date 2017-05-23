@@ -17,6 +17,10 @@ export const typeHandles = {
       return decodeURIComponent(paramValue).split(options.delimiter || OBJECT_KEY_DELIMITER);
     }
   },
+  bool: {
+    serialize(paramValue, options) { return paramValue.toString();},
+    parse(paramValue, options) { return paramValue === 'true';}
+  },
   object: {
     serialize(paramValue, options) {
       if (options.isFlags) {
