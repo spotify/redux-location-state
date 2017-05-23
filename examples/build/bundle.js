@@ -34159,6 +34159,9 @@
 	      if (options.isFlags) {
 	        var objectSplit = paramValue.split(options.delimiter || _constants.OBJECT_KEY_DELIMITER);
 	        return objectSplit.reduce(function (prev, curr) {
+	          if (curr === '') {
+	            return prev;
+	          }
 	          prev[curr] = true;
 	          return prev;
 	        }, {});
@@ -34232,12 +34235,12 @@
 	      isDefault = (typeof currentItemState === 'undefined' ? 'undefined' : _typeof(currentItemState)) === 'object' ? (0, _helpers.isEqual)(initialValue, currentItemState) : currentItemState === initialValue;
 	    }
 	    // if it is default or doesn't exist don't make a query parameter
-	    if (!currentItemState || isDefault) {
+	    if ((!currentItemState || isDefault) && !options.setAsEmptyItem) {
 	      return prev;
 	    }
 	    // otherwise, check if there is a serialize function
 	    if (options.serialize) {
-	      currentItemState = buildObjectString(currentItemState);
+	      currentItemState = options.serialize(currentItemState);
 	    } else if (type) {
 	      currentItemState = _typeHandles.typeHandles[type].serialize(currentItemState, options);
 	    }

@@ -33,6 +33,7 @@ export const typeHandles = {
       if (options.isFlags) {
           const objectSplit = paramValue.split(options.delimiter || OBJECT_KEY_DELIMITER);
           return objectSplit.reduce((prev, curr) => {
+            if(curr === '') {return prev;}
             prev[curr] = true;
             return prev;
           }, {});
