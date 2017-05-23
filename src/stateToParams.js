@@ -23,12 +23,12 @@ export function stateToParams(initialState, currentState, location) {
       isDefault = typeof(currentItemState) === 'object' ? isEqual(initialValue, currentItemState) : currentItemState === initialValue;
     }
     // if it is default or doesn't exist don't make a query parameter
-    if (!currentItemState || isDefault) {
+    if ((!currentItemState || isDefault) && !options.setAsEmptyItem) {
       return prev;
     }
     // otherwise, check if there is a serialize function
     if (options.serialize) {
-      currentItemState = buildObjectString(currentItemState);
+      currentItemState = options.serialize(currentItemState);
     } else if (type) {
      currentItemState = typeHandles[type].serialize(currentItemState, options);
     }
