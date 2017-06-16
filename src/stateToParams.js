@@ -9,7 +9,7 @@ export function stateToParams(initialState, currentState, location) {
   //check the original config for values
   const newQueryParams = Object.keys(pathConfig).reduce((prev, curr) => {
     const {stateKey, options = {}, initialState: initialValue, type} = pathConfig[curr];
-    let currentItemState = get(currentState, stateKey, initialValue);
+    let currentItemState = get(currentState, stateKey);
     let isDefault;
     //check if the date is the same as the one in initial value
     if (type === 'date') {
@@ -23,12 +23,17 @@ export function stateToParams(initialState, currentState, location) {
       isDefault = typeof(currentItemState) === 'object' ? isEqual(initialValue, currentItemState) : currentItemState === initialValue;
     }
     // if it is default or doesn't exist don't make a query parameter
-    if ((!currentItemState || isDefault) && !options.setAsEmptyItem) {
+    if (((!currentItemState && !options.serialize) || isDefault) && !options.setAsEmptyItem) {
       return prev;
     }
     // otherwise, check if there is a serialize function
     if (options.serialize) {
-      currentItemState = options.serialize(currentItemState);
+      const itemState = options.serialize(currentItemState);
+      // short circuit if specialized serializer returns specifically undefined
+      if (typeof itemState === 'undefined') {
+        return prev;
+      }
+      currentItemState = itemState;
     } else if (type) {
      currentItemState = typeHandles[type].serialize(currentItemState, options);
     }
