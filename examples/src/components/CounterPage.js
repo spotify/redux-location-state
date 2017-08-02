@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import actions from '../actions';
@@ -12,7 +12,7 @@ class CounterPage extends React.Component {
     this.decrementOne = this.props.onDecrement.bind(this, 1);
     this.decrementFive = this.props.onDecrement.bind(this, 5);
   }
-  render() {
+  render() {  
     return <div className="container-fluid">
       <div className="row">
         <div className="col-md-12">

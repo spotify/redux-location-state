@@ -1,13 +1,5 @@
-export function getCurrentLocation(history) {
-  // why doesn't hashHistory.createLocation(window.location) actually work...? who knows.
-  const location = history.createLocation(getPath());
-  // pull the "key" out of query._k and add it to location.key
-  // i guess react-router does this part usually
-  if (location && location.query && location.query._k) {
-    location.key = location.query._k;
-    delete location.query._k;
-  }
-  return location;
+function isNotDefined(value) {
+  return typeof value === 'undefined' || value === null;
 }
 
 export function createObjectFromConfig(initialState, location) {
@@ -51,6 +43,30 @@ export function getPath() {
   // if reached, assume browserHistory and combine the url
   return window.location.pathname + window.location.search + window.location.hash;
 }
+
+export function createParamsString(qp) {
+  const paramArray = Object.keys(qp).reduce((prev, key) => {
+    const keyString = key.toString();
+    const valueString = qp[key].toString();
+    if (isNotDefined(valueString) || (Array.isArray(valueString) && !valueString.length)) {
+      return prev;
+    }
+    return [...prev, (`${encodeURIComponent(keyString)}=${encodeURIComponent(valueString)}`)];
+  }, []);
+
+  return paramArray.length ? `?${paramArray.join('&')}` : '';
+}
+
+export function parseParams(query) {
+    return (query && query.split('&').reduce((prev, queryparam) => {
+      if (queryparam[0] === '?') {
+        queryparam = queryparam.substr(1);
+      }
+      const split = queryparam.split('=');
+      prev[decodeURIComponent(split[0])] = decodeURIComponent(split[1]) || '';
+      return prev;
+    }, {})) || {};
+  }
 
 export {default as get} from 'lodash/get';
 export {default as set} from 'lodash/set';

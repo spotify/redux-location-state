@@ -1,9 +1,10 @@
-import {isEqual, get, createObjectFromConfig} from './helpers';
+import {isEqual, get, createObjectFromConfig, parseParams, createParamsString} from './helpers';
 import {OBJECT_KEY_DELIMITER} from './constants';
 import {typeHandles} from './typeHandles';
 
 export function stateToParams(initialState, currentState, location) {
   const pathConfig = createObjectFromConfig(initialState, location);
+  const query = parseParams(location.search);
   if (!pathConfig) {return {location: {...location}}}
   let shouldPush = false;
   //check the original config for values
@@ -40,10 +41,10 @@ export function stateToParams(initialState, currentState, location) {
     // add new params to reduced object
     prev[encodeURIComponent(curr)] = encodeURIComponent(currentItemState);
     //check if a shouldPush property has changed
-    if ((encodeURIComponent(currentItemState) !== location.query[encodeURIComponent(curr)]) && options.shouldPush) {
+    if ((encodeURIComponent(currentItemState) !== query[encodeURIComponent(curr)]) && options.shouldPush) {
       shouldPush = true;
     }
     return prev;
   }, {});
-  return {location: {...location, query: newQueryParams}, shouldPush};
+  return {location: {...location, search: createParamsString(newQueryParams)}, shouldPush};
 }

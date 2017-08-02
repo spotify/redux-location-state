@@ -1,6 +1,6 @@
 import {parseQuery} from './parseQuery';
 import {LOCATION_POP} from './constants';
-import {getCurrentLocation, isEqual} from './helpers';
+import {isEqual, createParamsString} from './helpers';
 import {stateToParams} from './stateToParams';
 
 export function createReduxLocationActions(setupObject, locationToStateReducer, history, appReducer, stateToParamsFinal = stateToParams) {
@@ -14,7 +14,7 @@ export function createReduxLocationActions(setupObject, locationToStateReducer, 
 
         // if store state changed, update the URL via history.replace
         const nextState = store.getState();
-        const location = getCurrentLocation(history);
+        const location = history.location;
         //if the url changes but not the store the new url will not get the new params
         const isPageDifferent = location.pathname !== previousLocation.pathname;
         if (nextState !== state || isPageDifferent) {
@@ -23,7 +23,6 @@ export function createReduxLocationActions(setupObject, locationToStateReducer, 
           // assign shouldPush to a new variable and erase shouldPush as it isn't a standard
           // part of a location object. if shouldPush does not exist this is non-destructive
           const {shouldPush, location: nextLocation} = nextLocationOptions;
-
           if (!isEqual(nextLocation, location)) {
             // grab shouldPush from newly built location to see if it should update
             (shouldPush && !isPageDifferent) ? history.push(nextLocation) : history.replace(nextLocation);
@@ -37,9 +36,10 @@ export function createReduxLocationActions(setupObject, locationToStateReducer, 
     reducersWithLocation: (() => {
       const locationReducer = (state, action) => {
         const {type, payload} = action;
+        debugger;
         if (!payload) {return state;}
         if (LOCATION_POP === type) {
-          if (payload.query) {
+          if (payload.search) {
             payload.query = parseQuery(setupObject, payload);
           }
           return payload ? Object.assign({}, locationToStateReducer(state, payload)) : state;

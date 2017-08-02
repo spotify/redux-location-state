@@ -3,7 +3,7 @@ Utilities for reading & writing Redux store state to & from the URL
 
 ## Development Status
 
-Beta, currently working on an update for historyJS v4
+2.0 is updated for release of React Router V4
 
 ## How it works
 
@@ -69,16 +69,20 @@ Redux-location-state relies on redux reducers to update the state if the url cha
 
 ```javascript
 import {createStore, applyMiddleware, compose} from 'redux';
-import {Router, browserHistory} from 'react-router';
+import {Router} from 'react-router-dom';
 import {createReduxLocationActions, listenForHistoryChange} from 'redux-location-state';
-const {locationMiddleware, reducersWithLocation} = createReduxLocationActions(paramSetup, mapLocationToState, browserHistory, reducers);
+import createBrowserHistory from 'history/createBrowserHistory';
+
+const history = createBrowserHistory();
+
+const {locationMiddleware, reducersWithLocation} = createReduxLocationActions(paramSetup, mapLocationToState, history, reducers);
 const store = compose(applyMiddleware([locationMiddleware]))(createStore)(reducersWithLocation);
 ```
 
 you have now initialized your store with the location. Now all you have to do is start watching the url changes.
 
 ```javascript
-listenForHistoryChange(store, browserHistory);
+listenForHistoryChange(store, history);
 ```
 
 you have now turned on your location watcher!

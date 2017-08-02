@@ -10,15 +10,13 @@ describe('parseQuery function', () => {
         foo: {stateKey: 'count', type: 'object'}
       },
       '/otherpath/*': {
-        bazz: {stateKey: 'other'}
+        bazz: {stateKey: 'other', type: 'number'}
       }
     }
   });
   it('returns a map of the stateKeys with the values that are a query parameter', () => {
     const location = {
-      query: {
-        bazz: 25
-      },
+      search: '?bazz=25',
       pathname: '/otherpath/something',
     };
     expect(parseQuery(configPaths, location)).to.deep.equal({other: 25});
