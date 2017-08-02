@@ -1,5 +1,4 @@
 import {LOCATION_POP, LOCATION_PUSH} from './constants';
-import {getCurrentLocation} from './helpers';
 
 export function listenForHistoryChange(store, history) {
   const popDispatchFunction = (location) => {
@@ -14,15 +13,18 @@ export function listenForHistoryChange(store, history) {
       payload: {}
     };
   };
-  history.listen((location) => {
-    if (location && location.action && location.action === 'POP') {
-      store.dispatch(popDispatchFunction(getCurrentLocation(history)));
+  history.listen(() => {
+    if (history && history.action && history.action === 'POP') {
+      store.dispatch(popDispatchFunction(history.location));
     }
   });
-  history.listen((location) => {
-    if (location && location.action && location.action === 'PUSH') {
+  history.listen(() => {
+    if (history && history.action && history.action === 'PUSH') {
       //fire an empty dipatch to run the store functions
       store.dispatch(pushDispatchFunction());
     }
   });
+
+  // run on instantiation
+  store.dispatch(popDispatchFunction(history.location));
 }

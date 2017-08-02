@@ -1,15 +1,16 @@
 import {OBJECT_KEY_DELIMITER} from './constants';
-import {set, createObjectFromConfig} from './helpers';
+import {set, createObjectFromConfig, parseParams} from './helpers';
 import {typeHandles} from './typeHandles';
 
 export function parseQuery(initialState, location) {
   const pathConfig = createObjectFromConfig(initialState, location);
-  if (!pathConfig) {return location.query;}
+  const query = parseParams(location.search);
+  if (!pathConfig) {return location.search;}
 
   //return a new object parsed from the QP
   return Object.keys(pathConfig).reduce((prev, curr) => {
     const {stateKey, options = {}, initialState: initialValue, type} = pathConfig[curr];
-    const paramValue = location.query[curr];
+    const paramValue = query[curr];
     let finalValue;
     if (typeof paramValue === 'undefined' || paramValue === null) {
       // if the initial value is an empty object or array and not specifically set to use as an empty item set as undefined

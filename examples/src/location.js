@@ -15,6 +15,7 @@ import {INITIAL_STATE} from './constants';
 
 export function mapLocationToState(state, location) {
   switch(location.pathname) {
+    
     case "/":
       const stateFromLocation = location.query;
       return _.merge({}, state, stateFromLocation);

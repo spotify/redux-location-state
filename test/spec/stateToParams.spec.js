@@ -23,7 +23,6 @@ describe('createObjectFromConfig function', () => {
   beforeEach(() => {
     location = {
       pathname: '/',
-      query: {}
     };
     result = {
       location: cloneDeep(location),
@@ -41,7 +40,7 @@ describe('createObjectFromConfig function', () => {
     const currentState = {
       count: 'yeah'
     }
-    result.location.query = {foo: 'yeah'};
+    result.location.search = '?foo=yeah';
     expect(stateToParams(configPaths, currentState, location)).to.deep.equal(result);
   });
   it('returns a location object with the complex types state mapped to the config paths in the query object', () => {
@@ -57,11 +56,7 @@ describe('createObjectFromConfig function', () => {
       }
     }
     location.pathname = result.location.pathname = '/otherpath/donezo';
-    result.location.query = {
-      bazz: 'alex-marty-steve',
-      bar: 'foo-toon',
-      time: new Date().toISOString().substring(0, 10),
-    };
+    result.location.search = `?bazz=alex-marty-steve&bar=foo-toon&time=${new Date().toISOString().substring(0, 10)}`;
     expect(stateToParams(configPaths, currentState, location)).to.deep.equal(result);
   });
 });

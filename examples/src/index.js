@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {Router, Route, IndexRoute, hashHistory} from 'react-router';
+import {Router, Route} from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 
 import './styles/main.less';
 
@@ -18,18 +19,19 @@ import OtherPage from './components/OtherPage';
 /* MAIN APP ENTRY POINT */
 
 // create the store which will be used for all app state
-const store = createAppStore(reducer, hashHistory);
+const history = createBrowserHistory();
+const store = createAppStore(reducer, history);
 
 // bind history events to call location actions on history pop, push & replace
-listenForHistoryChange(hashHistory, store);
+listenForHistoryChange(store, history);
 
 const app = (
   <Provider {...{store}}>
-    <Router {...{history: hashHistory}}>
-      <Route name="app" path="/" component={App}>
-        <IndexRoute component={CounterPage}/>
-        <Route path="other" component={OtherPage}/>
-      </Route>
+    <Router {...{history: history}}>
+    <App>
+      <Route path="/" component={CounterPage} />
+      <Route path="/other" component={OtherPage}/>
+    </App>
     </Router>
   </Provider>
 );
