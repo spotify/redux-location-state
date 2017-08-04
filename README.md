@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/spotify/redux-location-state.svg?branch=master)](https://travis-ci.org/spotify/redux-location-state)
+
 # redux-location-state
 Utilities for reading & writing Redux store state to & from the URL
 
@@ -147,7 +149,7 @@ by default, if there is a query param update it will only replace the url (it wo
 p: {stateKey: 'foo', options: {shouldPush: true}}
 ```
 
-### delimiter 
+### delimiter
 
 this only applies to arrays and objects, but you can declare how you'd like to delimit your items. by default it is `-`, but it can be overwritten
 
@@ -175,7 +177,7 @@ if the config is
   p: {stateKey: 'foo', defaultValue: {}, type: 'object', options: {isFlags: true, }},
 }
 ```
-and the state is 
+and the state is
 ```javascript
 {
   '/': {
