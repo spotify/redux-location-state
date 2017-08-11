@@ -29,7 +29,7 @@ const app = (
   <Provider {...{store}}>
     <Router {...{history: history}}>
     <App>
-      <Route path="/" component={CounterPage} />
+      <Route exact path="/" component={CounterPage} />
       <Route path="/other" component={OtherPage}/>
     </App>
     </Router>
