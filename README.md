@@ -189,7 +189,7 @@ and the state is
   }
 }
 ```
-the url will be `?p=bazz-bar`
+the url will be `?p=bazz-bin`
 
 ### experimental
 
