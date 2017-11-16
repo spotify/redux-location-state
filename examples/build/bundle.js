@@ -113,7 +113,7 @@
 	    _react2.default.createElement(
 	      _App2.default,
 	      null,
-	      _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _CounterPage2.default }),
+	      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _CounterPage2.default }),
 	      _react2.default.createElement(_reactRouterDom.Route, { path: '/other', component: _OtherPage2.default })
 	    )
 	  )
@@ -28414,7 +28414,7 @@
 	        var type = action.type,
 	            payload = action.payload;
 	
-	        debugger;
+	
 	        if (!payload) {
 	          return state;
 	        }
