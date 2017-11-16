@@ -36,7 +36,7 @@ export function createReduxLocationActions(setupObject, locationToStateReducer, 
     reducersWithLocation: (() => {
       const locationReducer = (state, action) => {
         const {type, payload} = action;
-        debugger;
+        
         if (!payload) {return state;}
         if (LOCATION_POP === type) {
           if (payload.search) {
