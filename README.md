@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/spotify/redux-location-state.svg?branch=master)](https://travis-ci.org/spotify/redux-location-state)
 
 # redux-location-state
-Utilities for reading & writing Redux store state to & from the URL
+Utilities for reading & writing Redux store state to & from the URL. For use cases and reasoning about why this package exists, please read the blog post: https://labs.spotify.com/2017/08/10/thinking-of-state-in-a-world-of-urls/
 
 ## Development Status
 
