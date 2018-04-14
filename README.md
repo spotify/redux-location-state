@@ -33,16 +33,16 @@ const paramSetup = {
     }
   };
 ```
-Each page that you have declared should have an object of what to track. since you most likely don't want to track all of your state in the url this is helpful to pair down what you need
+Each page that you have declared should have an object of what to track, since you most likely don't want to track all of your state in the url this is helpful to pair down what you need
 
-Each key should be the path. If you have a variable path you can add '/*` to show that it is a variable
+Each key should be the path. If you have a variable path you can add `/*` to show that it is a variable
 
 Additionally, if you would like to track state no matter which page you're on, create an object with a key of `global`.
 
-the idea is that you declare the name you would like the url param to be, and then declare where that state lives in your state object for redux-location-state to map.
+The idea is that you declare the name you would like the url param to be, and then declare where that state lives in your state object for redux-location-state to map.
 
 #### mapLocationToState
-Redux-location-state relies on redux reducers to update the state if the url changes. for this Parameter, pass in a reducer that you would use to parse the returned data
+Redux-location-state relies on redux reducers to update the state if the url changes. For this Parameter, pass in a reducer that you would use to parse the returned data
 ```javascript
 //location is a React location object with the query object updated with the mapped values
 function mapLocationToState(state, location) {
@@ -90,13 +90,13 @@ listenForHistoryChange(store, history);
 you have now turned on your location watcher!
 
 ## options
-there are a lot of options that you have available in your config object.
+There are a lot of options that you have available in your config object.
 
-for every type of item there is a couple of default options that you can pass.
+For every type of item there is a couple of default options that you can pass.
 
 ### type
 
-if your redux store value is anything other than a string, it will need to be defined in the `type` key
+If your redux store value is anything other than a string, it will need to be defined in the `type` key
 
 ```javascript
 {
@@ -110,7 +110,7 @@ if your redux store value is anything other than a string, it will need to be de
 
 ### initialState
 
-this is declared on the top most level and will tell redux-location-state what the default is. if it is not declared it will assume `undefined` is the default.
+This is declared on the top most level and will tell redux-location-state what the default is. If it is not declared it will assume `undefined` is the default.
 
 ```javascript
 {
@@ -120,7 +120,7 @@ this is declared on the top most level and will tell redux-location-state what t
 
 ### serialize
 
-if you'd like to control how your item is shown in the url, you can pass in a function on `options.serialize`, which expects a string ready to be put on the url
+If you'd like to control how your item is shown in the url, you can pass in a function on `options.serialize`, which expects a string ready to be put on the url
 
 ```javascript
 p: {stateKey: 'foo', options: {
@@ -132,7 +132,7 @@ p: {stateKey: 'foo', options: {
 
 ### parse
 
-converse to serialize, if you pass this function in your config you can set your store however you'd like
+Converse to serialize, if you pass this function in your config you can set your store however you'd like
 ```javascript
 p: {stateKey: 'foo', options: {
   parse: (urlPathReturned) => {
@@ -143,7 +143,7 @@ p: {stateKey: 'foo', options: {
 
 ### shouldPush
 
-by default, if there is a query param update it will only replace the url (it won't be added to your history), you can override it by adding `shouldPush` to your options
+By default, if there is a query param update it will only replace the url (it won't be added to your history), you can override it by adding `shouldPush` to your options
 
 ```
 p: {stateKey: 'foo', options: {shouldPush: true}}
@@ -151,7 +151,7 @@ p: {stateKey: 'foo', options: {shouldPush: true}}
 
 ### delimiter
 
-this only applies to arrays and objects, but you can declare how you'd like to delimit your items. by default it is `-`, but it can be overwritten
+This only applies to arrays and objects, but you can declare how you'd like to delimit your items. by default it is `-`, but it can be overwritten
 
 ### setAsEmptyItem
 
@@ -159,17 +159,17 @@ Another item that only applies to arrays or objects. if you've declared an empty
 
 ### array
 
-in addition, there are some array specific options
+In addition, there are some array specific options
 
 #### keepOrder
 
-if you have an ordered array that you'd like to keep the order in the url, pass `keepOrder` as true
+If you have an ordered array that you'd like to keep the order in the url, pass `keepOrder` as true
 
 ### object
 
 #### isFlags
 
-for objects, you have the ability to pass in an object that just has true/false values. by passing the `isFlags` boolean, it will serialize only the items that are `true` and inline them
+For objects, you have the ability to pass in an object that just has true/false values. by passing the `isFlags` boolean, it will serialize only the items that are `true` and inline them
 
 if the config is
 ```javascript
@@ -193,7 +193,7 @@ the url will be `?p=bazz-bin`
 
 ### experimental
 
-if you'd like to parse all the objects in a custom way, you can add a fifth argument to `createReduxLocationActions` that will overwrite the function that maps the query params. this function will have to return a location object with the updated params in the query object.
+If you'd like to parse all the objects in a custom way, you can add a fifth argument to `createReduxLocationActions` that will overwrite the function that maps the query params. this function will have to return a location object with the updated params in the query object.
 ```javascript
 function overwriteLocationHandling(setupObject, nextState, location) {
   location.query.something = nextState;
@@ -203,7 +203,7 @@ function overwriteLocationHandling(setupObject, nextState, location) {
 
 ## Development
 
-to work on the project, run an `npm install` then run the following commands for different uses:
+To work on the project, run an `npm install` then run the following commands for different uses:
 
 * `npm run serve` to check localhost 8000 and see an example
 * `npm run build` to build `src` into `lib` and run tests
