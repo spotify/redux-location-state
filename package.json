@@ -19,7 +19,8 @@
     "lodash": "^4.13.1"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/spotify/redux-location-state.git"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0",
@@ -62,5 +63,9 @@
   "license": "Apache-2.0",
   "pre-commit": [
     "test"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/spotify/redux-location-state/issues"
+  },
+  "homepage": "https://github.com/spotify/redux-location-state#readme"
 }
