@@ -3,7 +3,7 @@
   "description": "Utilities for reading & writing Redux store state to & from the URL",
   "main": "lib/index.js",
   "author": "Josh Blaney <joshb@spotify.com> and Dan Delany <dand@spotify.com>",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
     "build-examples": "BABEL_ENV=production webpack --config webpack.config.base.js",
@@ -42,8 +42,8 @@
     "babel-preset-react": "^6.5.0",
     "chai": "^3.5.0",
     "css-loader": "^0.23.1",
-    "less": "^2.6.1",
-    "less-loader": "^2.2.3",
+    "less": "^3.0.2",
+    "less-loader": "^4.1.0",
     "lodash": "^4.13.1",
     "mocha": "^2.4.5",
     "pre-commit": "^1.2.2",
@@ -67,5 +67,8 @@
   "bugs": {
     "url": "https://github.com/spotify/redux-location-state/issues"
   },
-  "homepage": "https://github.com/spotify/redux-location-state#readme"
+  "homepage": "https://github.com/spotify/redux-location-state#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
 }
