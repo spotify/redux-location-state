@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {INITIAL_STATE} from './constants';
+import { INITIAL_STATE } from './constants';
 
 // this file exports two functions, which are the 'bridge' between the URL and app state:
 
@@ -16,7 +16,7 @@ import {INITIAL_STATE} from './constants';
 export function mapLocationToState(state, location) {
   switch(location.pathname) {
     
-    case "/":
+    case "/redux-location-state/":
       const stateFromLocation = location.query;
       return _.merge({}, state, stateFromLocation);
 

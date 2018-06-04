@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default class OtherPage extends React.Component {
   render() {
@@ -11,7 +11,7 @@ export default class OtherPage extends React.Component {
           <p>Welcome to the other page</p>
 
           <p>
-            <Link to="/">Back to the counter</Link>
+            <Link to="/redux-location-state/">Back to the counter</Link>
           </p>
         </div>
       </div>

@@ -9,7 +9,7 @@
     "build-examples": "BABEL_ENV=production webpack --config webpack.config.base.js",
     "build-lib": "BABEL_ENV=production rm -rf lib/ && babel src --out-dir lib",
     "build": "npm run test && npm run build-lib && npm run build-examples",
-    "serve": "cd examples && python -m SimpleHTTPServer 8000",
+    "serve": "python -m SimpleHTTPServer 8000",
     "test": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --recursive test/spec"
   },
   "engines": {

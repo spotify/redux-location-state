@@ -1,8 +1,8 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import actions from '../actions';
+
 
 class CounterPage extends React.Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class CounterPage extends React.Component {
           </div>
 
           <p>
-            <Link to="/other">Go to page two.</Link>
+            <Link to="/redux-location-state/other">Go to page two.</Link>
           </p>
         </div>
       </div>
