@@ -14,12 +14,14 @@ export function createObjectFromConfig(initialState, location) {
     const initialDeclareditemSplit = item.split('/');
     // make a copy to destroy
     const reducedInitialItem = [...initialDeclareditemSplit];
+    let deleted = 0;
     //destructive, but since its in a filter it should be fine
     initialDeclareditemSplit.forEach((split, index) => {
       //if the item has a * remove that query from both the match and the item to match
       if (split === '*') {
-        pathToMatchAgainst.splice(index, 1);
-        reducedInitialItem.splice(index, 1);
+        pathToMatchAgainst.splice(index - deleted, 1);
+        reducedInitialItem.splice(index - deleted, 1);
+        deleted++;
       }
     });
     // match the final strings sans wildcards against each other
