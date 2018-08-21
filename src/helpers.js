@@ -2,8 +2,7 @@ function isNotDefined(value) {
   return typeof value === 'undefined' || value === null;
 }
 
-export function createObjectFromConfig(initialState, location) {
-  if (!initialState) {return;}
+export function getMatchingDeclaredPath(initialState, location) {
   const allPathItems = location.pathname.split('/');
   const initialStateKeys = Object.keys(initialState);
   //find the matched object
@@ -27,7 +26,12 @@ export function createObjectFromConfig(initialState, location) {
     // match the final strings sans wildcards against each other
     return (pathToMatchAgainst.join('/')) === (reducedInitialItem.join('/'));
   });
-  const declaredPath = matchedItem[0];
+  return matchedItem[0];
+}
+
+export function createObjectFromConfig(initialState, location) {
+  if (!initialState) {return;}
+  const declaredPath = getMatchingDeclaredPath(initialState, location);
   return initialState.global ? Object.assign(initialState.global, (initialState[declaredPath] || {})) : initialState[declaredPath];
 }
 
