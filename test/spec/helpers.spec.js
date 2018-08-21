@@ -7,8 +7,11 @@ const configPaths = {
   },
   '/otherpath/*': {
     bazz: {stateKey: 'other'}
+  },
+  '/any/*/between/*': {
+    any: {stateKey: 'anything'}
   }
-}
+};
 
 describe('Helper functions', () => {
  describe('createObjectFromConfig function', () => {
@@ -28,10 +31,16 @@ describe('Helper functions', () => {
      const location = {
        pathname: '/otherpath/spotify',
      };
-     configPaths.global = {
-       globe: {stateKey: 'globalpath'}
+     const configPathsGlobal = {...configPaths, global: {globe: {stateKey: 'globalpath'}}};
+     expect(createObjectFromConfig(configPathsGlobal, location)).to.deep.equal(
+       {bazz: {stateKey: 'other'}, globe: {stateKey: 'globalpath'}}
+     );
+   });
+   it('returns an object of the possible redux store items to map including several wildcards', () => {
+     const location = {
+       pathname: '/any/somepath/between/morepath',
      };
-     expect(createObjectFromConfig(configPaths, location)).to.deep.equal({bazz: {stateKey: 'other'}, globe: {stateKey: 'globalpath'}});
+     expect(createObjectFromConfig(configPaths, location)).to.deep.equal({any: {stateKey: 'anything'}});
    });
  });
 });
