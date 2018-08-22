@@ -28764,6 +28764,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.getMatchingDeclaredPath = getMatchingDeclaredPath;
 	exports.createObjectFromConfig = createObjectFromConfig;
 	exports.getPath = getPath;
 	exports.createParamsString = createParamsString;
@@ -28804,10 +28805,7 @@
 	  return typeof value === 'undefined' || value === null;
 	}
 	
-	function createObjectFromConfig(initialState, location) {
-	  if (!initialState) {
-	    return;
-	  }
+	function getMatchingDeclaredPath(initialState, location) {
 	  var allPathItems = location.pathname.split('/');
 	  var initialStateKeys = Object.keys(initialState);
 	  //find the matched object
@@ -28818,18 +28816,27 @@
 	    var initialDeclareditemSplit = item.split('/');
 	    // make a copy to destroy
 	    var reducedInitialItem = [].concat(_toConsumableArray(initialDeclareditemSplit));
+	    var deleted = 0;
 	    //destructive, but since its in a filter it should be fine
 	    initialDeclareditemSplit.forEach(function (split, index) {
 	      //if the item has a * remove that query from both the match and the item to match
 	      if (split === '*') {
-	        pathToMatchAgainst.splice(index, 1);
-	        reducedInitialItem.splice(index, 1);
+	        pathToMatchAgainst.splice(index - deleted, 1);
+	        reducedInitialItem.splice(index - deleted, 1);
+	        deleted++;
 	      }
 	    });
 	    // match the final strings sans wildcards against each other
 	    return pathToMatchAgainst.join('/') === reducedInitialItem.join('/');
 	  });
-	  var declaredPath = matchedItem[0];
+	  return matchedItem[0];
+	}
+	
+	function createObjectFromConfig(initialState, location) {
+	  if (!initialState) {
+	    return;
+	  }
+	  var declaredPath = getMatchingDeclaredPath(initialState, location);
 	  return initialState.global ? Object.assign(initialState.global, initialState[declaredPath] || {}) : initialState[declaredPath];
 	}
 	
