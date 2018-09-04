@@ -1,10 +1,19 @@
-import {parseQuery} from './parseQuery';
-import {LOCATION_POP} from './constants';
-import {isEqual, createParamsString} from './helpers';
-import {stateToParams} from './stateToParams';
+import { LOCATION_POP } from './constants';
+import { isEqual, overrideAccessors, OVERWRITE_ACCESSORS, RLSCONFIG } from './helpers';
+import { parseQuery } from './parseQuery';
+import { stateToParams } from './stateToParams';
 
 export function createReduxLocationActions(setupObject, locationToStateReducer, history, appReducer, stateToParamsFinal = stateToParams) {
+  // Some Redux libraries need specific accessor functions and can't use lodash.
+  // This gives the opportunity to overwrite the accessor function
+  if (setupObject[RLSCONFIG] && setupObject[RLSCONFIG][OVERWRITE_ACCESSORS]) {
+    Object.keys(setupObject[RLSCONFIG][OVERWRITE_ACCESSORS]).forEach((key) => {
+      overrideAccessors(key, setupObject[RLSCONFIG][OVERWRITE_ACCESSORS][key]);
+    });
+  }
+
   let previousLocation = {};
+  
   return {
     // returns middleware that a user will install in their middleware array
     locationMiddleware: function locationMiddleware(store) {
