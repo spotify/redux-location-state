@@ -201,6 +201,23 @@ function overwriteLocationHandling(setupObject, nextState, location) {
 }
 ```
 
+### Overwrite accessors
+
+Some libraries (like immutable.js) won't allow you to use lodash's `get` function. There is an escape hatch to import your own `get`, `set`, or `isEqual`. You'll need to add a `RLSCONFIG` key with an object to your setup config.
+
+```javascript
+{
+  RLSCONFIG: {
+    'overwrite-accessors': {
+      get: immutableGet,
+      set: immutableSet,
+      isEqual: immutableIsEqual
+    }
+  }
+}
+```
+
+
 ## Development
 
 To work on the project, run an `npm install` then run the following commands for different uses:

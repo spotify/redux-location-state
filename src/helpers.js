@@ -1,3 +1,35 @@
+import lodashGet from 'lodash/get';
+import lodashIsEqual from 'lodash/isEqual';
+import lodashSet from 'lodash/set';
+
+export const RLSCONFIG = 'RLSCONFIG';
+export const OVERWRITE_ACCESSORS = 'overwrite-accessors';
+
+const helperAccessors = {
+  get: lodashGet,
+  set: lodashSet,
+  isEqual: lodashIsEqual,
+}
+
+// Some Redux libraries need specific accessor functions and can't use lodash.
+// This gives the opportunity to overwrite the accessor function
+export function overrideAccessors(name, fn) {
+  helperAccessors[name] = fn;
+}
+
+export function get(...args) {
+  return helperAccessors.get(...args);
+}
+
+export function set(...args) {
+  return helperAccessors.set(...args);
+}
+
+export function isEqual(...args) {
+  return helperAccessors.isEqual(...args);
+}
+
+
 function isNotDefined(value) {
   return typeof value === 'undefined' || value === null;
 }
@@ -74,6 +106,3 @@ export function parseParams(query) {
     }, {})) || {};
   }
 
-export {default as get} from 'lodash/get';
-export {default as set} from 'lodash/set';
-export {default as isEqual} from 'lodash/isEqual';
