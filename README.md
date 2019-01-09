@@ -27,7 +27,7 @@ const paramSetup = {
     '/': {
       p: {stateKey: 'foo', initialState: 'bazz', options: {shouldPush: true}},
       s: {stateKey: 'bar', initialState: {}, options: {isFlags: true}},
-    }
+    },
     global: {
       split: {stateKey: 'baz'},
     }
