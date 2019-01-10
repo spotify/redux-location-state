@@ -29013,7 +29013,7 @@
 	    return;
 	  }
 	  var declaredPath = getMatchingDeclaredPath(initialState, location);
-	  return initialState.global ? Object.assign(initialState.global, initialState[declaredPath] || {}) : initialState[declaredPath];
+	  return initialState.global ? Object.assign({}, initialState.global, initialState[declaredPath] || {}) : initialState[declaredPath];
 	}
 	
 	function getPath() {
