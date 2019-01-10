@@ -64,7 +64,9 @@ export function getMatchingDeclaredPath(initialState, location) {
 export function createObjectFromConfig(initialState, location) {
   if (!initialState) {return;}
   const declaredPath = getMatchingDeclaredPath(initialState, location);
-  return initialState.global ? Object.assign(initialState.global, (initialState[declaredPath] || {})) : initialState[declaredPath];
+  return initialState.global ?
+    Object.assign({}, initialState.global, (initialState[declaredPath] || {})) :
+    initialState[declaredPath];
 }
 
 export function getPath() {
