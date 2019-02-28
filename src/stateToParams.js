@@ -39,9 +39,9 @@ export function stateToParams(initialState, currentState, location) {
      currentItemState = typeHandles[type].serialize(currentItemState, options);
     }
     // add new params to reduced object
-    prev[encodeURIComponent(curr)] = encodeURIComponent(currentItemState);
+    prev[curr] = currentItemState;
     //check if a shouldPush property has changed
-    if ((encodeURIComponent(currentItemState) !== query[encodeURIComponent(curr)]) && options.shouldPush) {
+    if ((currentItemState !== query[curr]) && options.shouldPush) {
       shouldPush = true;
     }
     return prev;
