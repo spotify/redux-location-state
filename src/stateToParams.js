@@ -1,6 +1,5 @@
-import {isEqual, get, createObjectFromConfig, parseParams, createParamsString} from './helpers';
-import {OBJECT_KEY_DELIMITER} from './constants';
-import {typeHandles} from './typeHandles';
+import { createObjectFromConfig, createParamsString, get, isEqual, parseParams } from './helpers';
+import { typeHandles } from './typeHandles';
 
 export function stateToParams(initialState, currentState, location) {
   const pathConfig = createObjectFromConfig(initialState, location);

@@ -1,4 +1,4 @@
-import {ACTIONS, INITIAL_STATE} from '../constants.js'
+import { ACTIONS, INITIAL_STATE } from '../constants.js';
 
 export default function counterReducer(state = INITIAL_STATE, action) {
   const {type, payload} = action;

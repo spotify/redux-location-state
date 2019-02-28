@@ -1,7 +1,7 @@
-import {stateToParams} from '../../src/stateToParams';
-import {expect} from 'chai';
-import {cloneDeep} from 'lodash';
-import {beforeEach} from 'mocha';
+import { expect } from 'chai';
+import { cloneDeep } from 'lodash';
+import { beforeEach } from 'mocha';
+import { stateToParams } from '../../src/stateToParams';
 
 const configPaths = {
   '/': {
@@ -41,6 +41,13 @@ describe('createObjectFromConfig function', () => {
       count: 'yeah'
     }
     result.location.search = '?foo=yeah';
+    expect(stateToParams(configPaths, currentState, location)).to.deep.equal(result);
+  });
+  it('encodes correctly unusual characters', () => {
+    const currentState = {
+      count: '=!?'
+    }
+    result.location.search = '?foo=%3D!%3F';
     expect(stateToParams(configPaths, currentState, location)).to.deep.equal(result);
   });
   it('returns a location object with the complex types state mapped to the config paths in the query object', () => {

@@ -1,6 +1,6 @@
-import {parseQuery} from '../../src/parseQuery';
-import {expect} from 'chai';
-import {beforeEach} from 'mocha';
+import { expect } from 'chai';
+import { beforeEach } from 'mocha';
+import { parseQuery } from '../../src/parseQuery';
 
 describe('parseQuery function', () => {
   let configPaths;
@@ -11,6 +11,9 @@ describe('parseQuery function', () => {
       },
       '/otherpath/*': {
         bazz: {stateKey: 'other', type: 'number'}
+      },
+      '/unusual': {
+        bar: {stateKey: 'unusual'}
       }
     }
   });
@@ -23,11 +26,17 @@ describe('parseQuery function', () => {
   });
   it('returns an undefined key undefined if the initialState on a value is an empty object', () => {
     const location = {
-      query: {
-      },
+      search: '',
       pathname: '/',
     };
     expect(parseQuery(configPaths, location)).to.deep.equal({count: undefined});
+  });
+  it('decodes unusual characters', () => {
+    const location = {
+      search: '?bar=%3D!%3F',
+      pathname: '/unusual',
+    };
+    expect(parseQuery(configPaths, location)).to.deep.equal({unusual: '=!?'});
   });
   it('returns an empty object if the option of setAsEmptyItem is true and the value is an empty object', () => {
     const location = {

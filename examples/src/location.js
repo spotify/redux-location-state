@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {INITIAL_STATE} from './constants';
+import { INITIAL_STATE } from './constants';
 
 // this file exports two functions, which are the 'bridge' between the URL and app state:
 

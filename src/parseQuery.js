@@ -1,6 +1,5 @@
-import {OBJECT_KEY_DELIMITER} from './constants';
-import {set, createObjectFromConfig, parseParams} from './helpers';
-import {typeHandles} from './typeHandles';
+import { createObjectFromConfig, parseParams, set } from './helpers';
+import { typeHandles } from './typeHandles';
 
 export function parseQuery(initialState, location) {
   const pathConfig = createObjectFromConfig(initialState, location);
