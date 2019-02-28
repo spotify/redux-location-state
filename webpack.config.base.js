@@ -13,14 +13,14 @@ module.exports = {
     },
     devtool: 'source-map',
     plugins: [
-        new webpack.NoErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin()
     ],
     resolve: {
-        root: path.join(__dirname, 'src'),
-        extensions: ['', '.js', '.jsx']
+        modules: [path.join(__dirname, 'src'), 'node_modules'],
+        extensions: ['.js', '.jsx']
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
                 loaders: ['babel-loader'],
@@ -31,8 +31,8 @@ module.exports = {
                 ]
             },
             {
-                test: /\.less?$/,
-                loader: "style!css!less"
+                test: /\.css?$/,
+                loaders: ["style-loader", "css-loader"]
             }
         ]
     }

@@ -1,20 +1,15 @@
+import createBrowserHistory from 'history/createBrowserHistory';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
-import {Router, Route} from 'react-router-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
-
-import './styles/main.less';
-
-import createAppStore from './store';
-import reducer from './reducers';
-
-import {listenForHistoryChange} from '../../src/index';
-
+import { Provider } from 'react-redux';
+import { Route, Router } from 'react-router-dom';
+import { listenForHistoryChange } from '../../src/index';
 import App from './components/App';
 import CounterPage from './components/CounterPage';
 import OtherPage from './components/OtherPage';
-
+import reducer from './reducers';
+import createAppStore from './store';
+import './styles/main.css';
 
 /* MAIN APP ENTRY POINT */
 
