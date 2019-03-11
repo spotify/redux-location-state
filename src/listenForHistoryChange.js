@@ -1,4 +1,4 @@
-import {LOCATION_POP, LOCATION_PUSH} from './constants';
+import { LOCATION_POP, LOCATION_PUSH } from './constants';
 
 export function listenForHistoryChange(store, history) {
   const popDispatchFunction = (location) => {
@@ -7,10 +7,10 @@ export function listenForHistoryChange(store, history) {
       payload: location
     };
   };
-  const pushDispatchFunction = () => {
+  const pushDispatchFunction = (location) => {
     return {
       type: LOCATION_PUSH,
-      payload: {}
+      payload: location
     };
   };
   history.listen(() => {
@@ -21,7 +21,7 @@ export function listenForHistoryChange(store, history) {
   history.listen(() => {
     if (history && history.action && history.action === 'PUSH') {
       //fire an empty dipatch to run the store functions
-      store.dispatch(pushDispatchFunction());
+      store.dispatch(pushDispatchFunction(history.location));
     }
   });
 
