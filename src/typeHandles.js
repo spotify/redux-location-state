@@ -1,4 +1,5 @@
 import {OBJECT_KEY_DELIMITER} from './constants';
+import {paramDecoder} from "./helpers";
 
 export const typeHandles = {
   number: {
@@ -14,7 +15,7 @@ export const typeHandles = {
       return (options.keepOrder ? [...paramValue] : [...paramValue].sort()).join(options.delimiter || OBJECT_KEY_DELIMITER);
     },
     parse(paramValue, options) {
-      return decodeURIComponent(paramValue).split(options.delimiter || OBJECT_KEY_DELIMITER);
+      return paramDecoder(paramValue).split(options.delimiter || OBJECT_KEY_DELIMITER);
     }
   },
   bool: {
@@ -40,7 +41,7 @@ export const typeHandles = {
 
         // otherwise parse the object
         } else {
-          const allObjectValues = decodeURIComponent(paramValue).split(',');
+          const allObjectValues = paramDecoder(paramValue).split(',');
           // since it was serialized as an array, split by comma and check to see if there are simple values
           return allObjectValues.reduce((prev, curr) => {
             let [key, value] = curr.split(OBJECT_KEY_DELIMITER);
@@ -50,4 +51,4 @@ export const typeHandles = {
         }
     }
   }
-}
+};
