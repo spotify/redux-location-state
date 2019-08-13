@@ -9,6 +9,15 @@ const helperAccessors = {
   get: lodashGet,
   set: lodashSet,
   isEqual: lodashIsEqual,
+};
+
+let paramEncoder = encodeURIComponent;
+export let paramDecoder = decodeURIComponent;
+export function setParamEncoder(encoder) {
+  paramEncoder = encoder;
+}
+export function setParamDecoder(decoder) {
+  paramDecoder = decoder;
 }
 
 // Some Redux libraries need specific accessor functions and can't use lodash.
@@ -91,7 +100,7 @@ export function createParamsString(qp) {
     if (isNotDefined(valueString) || (Array.isArray(valueString) && !valueString.length)) {
       return prev;
     }
-    return [...prev, (`${encodeURIComponent(keyString)}=${encodeURIComponent(valueString)}`)];
+    return [...prev, (`${paramEncoder(keyString)}=${paramEncoder(valueString)}`)];
   }, []);
 
   return paramArray.length ? `?${paramArray.join('&')}` : '';
@@ -103,7 +112,7 @@ export function parseParams(query) {
         queryparam = queryparam.substr(1);
       }
       const split = queryparam.split('=');
-      prev[decodeURIComponent(split[0])] = decodeURIComponent(split[1]) || '';
+      prev[paramDecoder(split[0])] = paramDecoder(split[1]) || '';
       return prev;
     }, {})) || {};
   }
