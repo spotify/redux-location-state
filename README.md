@@ -153,6 +153,10 @@ p: {stateKey: 'foo', options: {shouldPush: true}}
 
 This only applies to arrays and objects, but you can declare how you'd like to delimit your items. by default it is `-`, but it can be overwritten
 
+```
+p: {stateKey: 'foo', options: {delimiter: '_'}
+```
+
 ### setAsEmptyItem
 
 Another item that only applies to arrays or objects. if you've declared an empty object or array as the default, it will assume if it sees nothing in the query param that you want undefined. you can explicitly tell it to return an empty array or object by passing this flag as `true`.
