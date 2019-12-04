@@ -106,12 +106,12 @@ export function createParamsString(qp) {
   return paramArray.length ? `?${paramArray.join('&')}` : '';
 }
 
-export function parseParams(query) {
+export function parseParams(query, customParser) {
     return (query && query.split('&').reduce((prev, queryparam) => {
       if (queryparam[0] === '?') {
         queryparam = queryparam.substr(1);
       }
-      const split = queryparam.split('=');
+      const split = customParser ? customParser(queryparam) : queryparam.split('=');
       prev[paramDecoder(split[0])] = paramDecoder(split[1]) || '';
       return prev;
     }, {})) || {};

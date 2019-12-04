@@ -221,6 +221,18 @@ Some libraries (like immutable.js) won't allow you to use lodash's `get` functio
 }
 ```
 
+### Overwrite query parser
+
+By default, the parser for query params will split on `=`, however, this doesn't take into account that there may be other `=` in the query param value. There also may need to be other ways to split query parameters, so you can now also pass in your own custom query param parser, like so:
+
+```javascript
+{
+  RLSCONFIG: {
+    queryParser: (q) => (q.split('='))
+  }
+}
+```
+
 
 ## Development
 
