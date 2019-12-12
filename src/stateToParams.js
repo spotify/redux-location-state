@@ -1,9 +1,10 @@
-import { createObjectFromConfig, createParamsString, get, isEqual, parseParams } from './helpers';
+import { createObjectFromConfig, createParamsString, get, isEqual, parseParams, RLSCONFIG } from './helpers';
 import { typeHandles } from './typeHandles';
 
 export function stateToParams(initialState, currentState, location) {
   const pathConfig = createObjectFromConfig(initialState, location);
-  const query = parseParams(location.search);
+  const customParser = initialState[RLSCONFIG] && initialState[RLSCONFIG].queryParser;
+  const query = parseParams(location.search, customParser);
   if (!pathConfig) {return {location: {...location}}}
   let shouldPush = false;
   //check the original config for values

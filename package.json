@@ -3,7 +3,7 @@
   "description": "Utilities for reading & writing Redux store state to & from the URL",
   "main": "lib/index.js",
   "author": "Josh Blaney <joshb@spotify.com> and Dan Delany <dand@spotify.com>",
-  "version": "2.5.2",
+  "version": "2.6.0",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
     "build-examples": "BABEL_ENV=production webpack --config webpack.config.base.js",

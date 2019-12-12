@@ -1,9 +1,10 @@
-import { createObjectFromConfig, parseParams, set } from './helpers';
+import { createObjectFromConfig, parseParams, set, RLSCONFIG } from './helpers';
 import { typeHandles } from './typeHandles';
 
 export function parseQuery(initialState, location) {
   const pathConfig = createObjectFromConfig(initialState, location);
-  const query = parseParams(location.search);
+  const customParser = initialState[RLSCONFIG] && initialState[RLSCONFIG].queryParser;
+  const query = parseParams(location.search, customParser);
   if (!pathConfig) {return location.search;}
 
   //return a new object parsed from the QP
