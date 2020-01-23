@@ -33005,7 +33005,7 @@ function stateToParams(initialState, currentState, location) {
       isDefault = (typeof currentItemState === 'undefined' ? 'undefined' : _typeof(currentItemState)) === 'object' ? (0, _helpers.isEqual)(initialValue, currentItemState) : currentItemState === initialValue;
     }
     // if it is default or doesn't exist don't make a query parameter
-    if ((!(typeof currentItemState === 'undefined' ? 'undefined' : _typeof(currentItemState)) === "undefined" && !options.serialize || isDefault) && !options.setAsEmptyItem) {
+    if ((typeof currentItemState === "undefined" && !options.serialize || isDefault) && !options.setAsEmptyItem) {
       return prev;
     }
     // otherwise, check if there is a serialize function
