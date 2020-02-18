@@ -45,12 +45,16 @@ export function createReduxLocationActions(setupObject, locationToStateReducer, 
     reducersWithLocation: (() => {
       const locationReducer = (state, action) => {
         const {type, payload} = action;
-        if (!payload) {return state;}
-        if (LOCATION_POP === type) {
-          payload.query = parseQuery(setupObject, payload);
-          return payload ? locationToStateReducer(state, payload) : state;
+        if (type !== LOCATION_POP  || !payload) {
+          return state;
         }
-        return state;
+
+        const locationWithQuery = {
+          ...payload,
+          query: parseQuery(setupObject, payload)
+        };
+        return locationToStateReducer(state, locationWithQuery);
+
       };
 
       return function combinedReducer(state, action) {
