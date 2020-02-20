@@ -96,10 +96,11 @@ export function getPath() {
 export function createParamsString(qp) {
   const paramArray = Object.keys(qp).reduce((prev, key) => {
     const keyString = key.toString();
-    const valueString = qp[key].toString();
-    if (isNotDefined(valueString) || (Array.isArray(valueString) && !valueString.length)) {
+    const value = qp[key];
+    if (isNotDefined(value) || (Array.isArray(value) && !value.length)) {
       return prev;
     }
+    const valueString = qp[key].toString();
     return [...prev, (`${paramEncoder(keyString)}=${paramEncoder(valueString)}`)];
   }, []);
 
