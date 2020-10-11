@@ -1,6 +1,6 @@
-import {typeHandles} from '../../src/typeHandles';
-import {expect} from 'chai';
-import {OBJECT_KEY_DELIMITER} from '../../src/constants';
+import { expect } from 'chai';
+import { OBJECT_KEY_DELIMITER } from '../../src/constants';
+import { typeHandles } from '../../src/typeHandles';
 
 describe('typeHandles functions', () => {
 

@@ -1,4 +1,4 @@
-import { createObjectFromConfig, parseParams, set, RLSCONFIG } from './helpers';
+import { createObjectFromConfig, parseParams, RLSCONFIG, set } from './helpers';
 import { typeHandles } from './typeHandles';
 
 export function parseQuery(initialState, location) {
@@ -6,7 +6,7 @@ export function parseQuery(initialState, location) {
   const customParser = initialState[RLSCONFIG] && initialState[RLSCONFIG].queryParser;
   const query = parseParams(location.search, customParser);
   if (!pathConfig) {return location.search;}
-
+  
   //return a new object parsed from the QP
   return Object.keys(pathConfig).reduce((prev, curr) => {
     const {stateKey, options = {}, initialState: initialValue, type} = pathConfig[curr];
@@ -14,10 +14,10 @@ export function parseQuery(initialState, location) {
     let finalValue;
     if (typeof paramValue === 'undefined' || paramValue === null) {
       // if the initial value is an empty object or array and not specifically set to use as an empty item set as undefined
-        set(prev, stateKey, initialValue);
+      set(prev, stateKey, initialValue);
       return prev;
     }
-
+    
     //allow a user to pass in a custom parser
     if (options.parse) {
       finalValue = options.parse(paramValue);

@@ -74,8 +74,8 @@ export function createObjectFromConfig(initialState, location) {
   if (!initialState) {return;}
   const declaredPath = getMatchingDeclaredPath(initialState, location);
   return initialState.global ?
-    Object.assign({}, initialState.global, (initialState[declaredPath] || {})) :
-    initialState[declaredPath];
+  Object.assign({}, initialState.global, (initialState[declaredPath] || {})) :
+  initialState[declaredPath];
 }
 
 export function getPath() {
@@ -83,12 +83,12 @@ export function getPath() {
   // We can't use window.location.hash here - inconsistent across browsers
   const href = window.location.href;
   const indexAfterHash = href.indexOf('#') + 1;
-
+  
   // check if there is a hash and if there's a url path after the hash
   if (indexAfterHash && href.substring(indexAfterHash).indexOf('/') === 0) {
     return href.substring(indexAfterHash);
   }
-
+  
   // if reached, assume browserHistory and combine the url
   return window.location.pathname + window.location.search + window.location.hash;
 }
@@ -103,18 +103,30 @@ export function createParamsString(qp) {
     const valueString = qp[key].toString();
     return [...prev, (`${paramEncoder(keyString)}=${paramEncoder(valueString)}`)];
   }, []);
-
+  
   return paramArray.length ? `?${paramArray.join('&')}` : '';
 }
 
 export function parseParams(query, customParser) {
-    return (query && query.split('&').reduce((prev, queryparam) => {
-      if (queryparam[0] === '?') {
-        queryparam = queryparam.substr(1);
-      }
-      const split = customParser ? customParser(queryparam) : queryparam.split('=');
-      prev[paramDecoder(split[0])] = paramDecoder(split[1]) || '';
-      return prev;
-    }, {})) || {};
-  }
+  return (query && query.split('&').reduce((prev, queryparam) => {
+    if (queryparam[0] === '?') {
+      queryparam = queryparam.substr(1);
+    }
+    const split = customParser ? customParser(queryparam) : queryparam.split('=');
+    prev[paramDecoder(split[0])] = paramDecoder(split[1]) || '';
+    return prev;
+  }, {})) || {};
+}
 
+export function getOriginalDate(date) {
+  if (!date) {
+    return undefined
+  }
+  
+  const month = date.getUTCMonth() + 1;
+  const day = date.getUTCDate();
+  const year = date.getUTCFullYear();
+  
+  return `${day}/${month}/${year}`;
+  
+}

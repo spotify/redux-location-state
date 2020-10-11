@@ -1,3 +1,4 @@
-export {createReduxLocationActions} from './createReduxLocationActions';
-export {listenForHistoryChange} from './listenForHistoryChange';
-export {setParamDecoder, setParamEncoder} from './helpers';
+export { createReduxLocationActions } from './createReduxLocationActions';
+export { setParamDecoder, setParamEncoder } from './helpers';
+export { listenForHistoryChange } from './listenForHistoryChange';
+
