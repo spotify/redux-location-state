@@ -11,7 +11,7 @@ export function createReduxLocationActions(setupObject, locationToStateReducer, 
       overrideAccessors(key, setupObject[RLSCONFIG][OVERWRITE_ACCESSORS][key]);
     });
   }
-
+  
   let previousLocation = {};
   
   return {
@@ -20,7 +20,7 @@ export function createReduxLocationActions(setupObject, locationToStateReducer, 
       return next => action => {
         const state = store.getState();
         const result = next(action);
-
+        
         // if store state changed, update the URL via history.replace
         const nextState = store.getState();
         const location = history.location;
@@ -37,7 +37,7 @@ export function createReduxLocationActions(setupObject, locationToStateReducer, 
             (shouldPush && !isPageDifferent) ? history.push(nextLocation) : history.replace(nextLocation);
           }
         }
-
+        
         return result;
       };
     },
@@ -48,15 +48,15 @@ export function createReduxLocationActions(setupObject, locationToStateReducer, 
         if (type !== LOCATION_POP  || !payload) {
           return state;
         }
-
+        
         const locationWithQuery = {
           ...payload,
           query: parseQuery(setupObject, payload)
         };
         return locationToStateReducer(state, locationWithQuery);
-
+        
       };
-
+      
       return function combinedReducer(state, action) {
         const postReducerState = appReducer(state, action);
         const postLocationState = locationReducer(postReducerState, action);
