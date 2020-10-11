@@ -1,4 +1,4 @@
-import { createObjectFromConfig, createParamsString, get, isEqual, parseParams, RLSCONFIG } from './helpers';
+import { createObjectFromConfig, createParamsString, get, getOriginalDate, isEqual, parseParams, RLSCONFIG } from './helpers';
 import { typeHandles } from './typeHandles';
 
 export function stateToParams(initialState, currentState, location) {
@@ -14,7 +14,10 @@ export function stateToParams(initialState, currentState, location) {
     let isDefault;
     //check if the date is the same as the one in initial value
     if (type === 'date') {
-      isDefault = (currentItemState.toISOString().substring(0, 10)) === (initialValue && initialValue.toISOString().substring(0, 10));
+      const currentDate = getOriginalDate(currentItemState);
+      const initialValueDate = getOriginalDate(initialValue);
+      
+      isDefault = initialValue && (currentDate === initialValueDate);
     } else {
       //if an empty object, make currentItemState undefined
       if (currentItemState && typeof(currentItemState) === 'object' && !Object.keys(currentItemState).length) {
@@ -36,7 +39,7 @@ export function stateToParams(initialState, currentState, location) {
       }
       currentItemState = itemState;
     } else if (type) {
-     currentItemState = typeHandles[type].serialize(currentItemState, options);
+      currentItemState = typeHandles[type].serialize(currentItemState, options);
     }
     // add new params to reduced object
     prev[curr] = currentItemState;
