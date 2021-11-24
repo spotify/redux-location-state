@@ -197,11 +197,11 @@ the url will be `?p=bazz-bin`
 
 ### experimental
 
-If you'd like to parse all the objects in a custom way, you can add a fifth argument to `createReduxLocationActions` that will overwrite the function that maps the query params. this function will have to return a location object with the updated params in the query object.
+If you'd like to parse all the objects in a custom way, you can add a fifth argument to `createReduxLocationActions` that will overwrite the function that maps the query params. this function will have to return an object with a location object inside and a `shouldPush` flag. The location inside contains the updated params in the query object and the `shouldPush` flag tells if `history.push` or `history.replace` should be invoked. In a default implementation `shouldPush` becomes `true` if at least one mapped parameter has changed and has `shouldPush: true` in its config, otherwise `shouldPush` is `false`.
 ```javascript
 function overwriteLocationHandling(setupObject, nextState, location) {
   location.query.something = nextState;
-  return location;
+  return {location, shouldPush: true};
 }
 ```
 
