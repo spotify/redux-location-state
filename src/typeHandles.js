@@ -25,9 +25,9 @@ export const typeHandles = {
   object: {
     serialize(paramValue, options) {
       if (options.isFlags) {
-          return Object.keys(paramValue).filter((item, index) => paramValue[item]).join(OBJECT_KEY_DELIMITER);
+          return Object.keys(paramValue).filter((item, index) => paramValue[item]).join(options.delimiter || OBJECT_KEY_DELIMITER);
         } else {
-          return Object.keys(paramValue).sort().map((item, index) => `${item}${OBJECT_KEY_DELIMITER}${paramValue[item]}`);
+          return Object.keys(paramValue).sort().map((item, index) => `${item}${options.delimiter || OBJECT_KEY_DELIMITER}${paramValue[item]}`);
         }
     },
     parse(paramValue, options) {
@@ -44,7 +44,7 @@ export const typeHandles = {
           const allObjectValues = paramDecoder(paramValue).split(',');
           // since it was serialized as an array, split by comma and check to see if there are simple values
           return allObjectValues.reduce((prev, curr) => {
-            let [key, value] = curr.split(OBJECT_KEY_DELIMITER);
+            let [key, value] = curr.split(options.delimiter || OBJECT_KEY_DELIMITER);
             prev[key] = value;
             return prev;
           }, {});
