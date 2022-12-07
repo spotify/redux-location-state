@@ -72,5 +72,21 @@ describe('typeHandles functions', () => {
    it('should parse an object and return a object of true keys', () => {
      expect(object.parse('boo-buzz', {isFlags: true})).to.deep.equal({boo: true, buzz: true});
    });
+   it('should return a serialized object with a customized delimiter', () => {
+     const delimiter = '|';
+     expect(object.serialize(testObject, {delimiter})).to.deep.equal([`key${delimiter}true`, `test${delimiter}yes`]);
+   });
+   it('should parse a string with a customized delimiter', () => {
+     const delimiter = '|';
+     expect(object.parse(`key${delimiter}value,foo${delimiter}bar`, {delimiter})).to.deep.equal({key: 'value', foo: 'bar'});
+   });
+   it('should return a serialized object with a customized delimiter in the flags mode', () => {
+    const delimiter = '|';
+    expect(object.serialize({foo: true, bar: true}, {delimiter, isFlags: true})).to.equal(`foo${delimiter}bar`);
+   });
+   it('should parse a string with a customized delimiter in the flags mode', () => {
+    const delimiter = '|';
+    expect(object.parse(`foo|bar`, {delimiter, isFlags: true})).to.deep.equal({foo: true, bar: true});
+   });
  });
 });
